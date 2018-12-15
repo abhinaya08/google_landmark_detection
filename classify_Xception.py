@@ -51,15 +51,6 @@ y_probabilities = model.predict_generator(val_generator,
                                           val_samples=val_generator.nb_sample)
 # Calculate class labels
 y_classes = probas_to_classes(y_probabilities)
-filenames = [filename.split('/')[1] for filename in test_generator.filenames]
-ids = [filename.split('.')[0] for filename in filenames]
-
-# save results as a csv file in the specified results directory
-with open(os.path.join(results_path, results_name), 'w') as file:
-    writer = csv.writer(file)
-    writer.writerow(('id', 'class0_prob', 'class1_prob', 'label'))
-    writer.writerows(zip(ids, y_probabilities[:, 0], y_probabilities[:, 1], y_classes))
-
 
 
 #=============Predicting for test images
